@@ -10,13 +10,14 @@ Add virtual devices for your MillHeat devices to your [Domoticz](https://www.dom
 
 Get full device status from the API into your Domoticz
 Current info:
-* asdfasdf
-* asdfasdf2
+* On/Off status
+* Temperature
+* Thermostat Setpoint
 
 Installation and setup
 ----------------------
 
-If you are use a Raspberry Pi to host your Domoticz, you probably need to install libpython3.4 for plugins to work.
+If you are use a Raspberry Pi to host your Domoticz, you probably need to install some python stuff for plugin to work.
 
 ```bash
 sudo apt install python3-dev python3-pip
