@@ -2,10 +2,8 @@
 #
 # Author: Appelflap (Albert Drenth) <albert@appelflap.me>
 #
-# Version 0.1.0 (2018-11-25) : Create Basic structure, connector
-#
 """
-<plugin key="MillHeat" name="MillHeat Control" author="appelflap" version="0.1.4" wikilink="http://www.domoticz.com/wiki/plugins/MillHeat.html" externallink="https://github.com/appelflap/domoticz-millheat">
+<plugin key="MillHeat" name="MillHeat Control" author="appelflap" version="0.1.4" externallink="https://github.com/appelflap/domoticz-millheat">
     <description>
         <h2>MillHeat Plugin</h2>
         <h3>Features</h3>
@@ -46,7 +44,7 @@ import sys, os
 import getpass
 
 # Add pip3 locations
-sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.6/dist-packages')
+sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.5/site-packages')
 sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.6/site-packages')
 sys.path.append('/usr/lib/python3/dist-packages')
 
