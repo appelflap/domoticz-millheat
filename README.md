@@ -1,7 +1,7 @@
 # domoticz-millheat
 Domoticz MillHeat Plugin
 
-Work in progress! Not yet tested.
+Work in progress! 
 
 Short summary
 -------------
@@ -12,6 +12,9 @@ Get full device status from the API into your Domoticz
 Current info:
 * On/Off status
 * Temperature
+* Thermostat Setpoint
+
+Able to change:
 * Thermostat Setpoint
 
 Installation and setup
@@ -30,8 +33,7 @@ python3 -m pip install millheater
 In your `domoticz/plugins` directory do
 
 ```bash
-cd domoticz/plugins
-git clone https://github.com/appelflap/domoticz-millheat.git
+git clone https://github.com/appelflap/domoticz-millheat.git millheat
 ```
 
 Alternatively you can download the latest version from
@@ -49,4 +51,4 @@ sudo service domoticz.sh restart
 Now go to **Setup**, **Hardware** in your Domoticz interface. There you add
 **MillHeat**.
 
-Make sure you enter all the required fields.
+Make sure you enter all the required fields for authentication.
