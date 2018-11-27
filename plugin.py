@@ -40,12 +40,14 @@
 </plugin>
 """
 import Domoticz
-import sys, os
+import sys
 import getpass
 
 # Add pip3 locations
 sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.5/site-packages')
 sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.6/site-packages')
+sys.path.append('/usr/local/lib/python3.5/dist-packages')
+sys.path.append('/usr/local/lib/python3.6/dist-packages')
 sys.path.append('/usr/lib/python3/dist-packages')
 
 import mill
@@ -59,8 +61,6 @@ import mill
 # Images = {'Fireplace': Image}
 
 class MillHeat:
-    enabled = False
-    httpConn = None
     notify = False
     debug = False
     
@@ -81,12 +81,6 @@ class MillHeat:
             DumpConfigToLog()
                 
         Domoticz.Heartbeat(self.pollInterval)
-        
-        self.mill = mill.Mill(Parameters["Username"], Parameters["Password"])
-        self.mill.sync_connect()
-        self.mill.sync_update_heaters()
-        
-        self.getDevices()
 
     def onStop(self):
         Domoticz.Log("Plugin is stopping")
@@ -129,7 +123,8 @@ class MillHeat:
             if (Devices[Unit].Type==242):
                 Domoticz.Log("Setting Thermostat "+Devices[Unit].DeviceID+" (external: "+str(decodeHeaterId(Devices[Unit].DeviceID[0:4]))+") to "+str(Level))
                 self.mill.sync_set_heater_temp(decodeHeaterId(Devices[Unit].DeviceID[0:4]), round(Level))
-                
+        
+        # get from API to sync again
         self.getDevices()
                 
         self.mill.sync_close_connection()
