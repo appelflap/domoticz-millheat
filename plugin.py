@@ -50,11 +50,6 @@ path=''
 path=site.getsitepackages()
 for i in path:    
     sys.path.append(i)
-    
-# Add pip3 locations
-sys.path.append('/usr/local/lib/python3.5/dist-packages')
-sys.path.append('/usr/local/lib/python3.6/dist-packages')
-sys.path.append('/usr/lib/python3/dist-packages')
 
 import mill
 
