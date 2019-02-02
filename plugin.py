@@ -40,12 +40,15 @@
 </plugin>
 """
 import Domoticz
-import sys, os
+import sys
 import getpass
+import threading
 
 # Add pip3 locations
 sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.5/site-packages')
 sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.6/site-packages')
+sys.path.append('/usr/local/lib/python3.5/dist-packages')
+sys.path.append('/usr/local/lib/python3.6/dist-packages')
 sys.path.append('/usr/lib/python3/dist-packages')
 
 import mill
@@ -91,6 +94,12 @@ class MillHeat:
     def onStop(self):
         Domoticz.Log("Plugin is stopping")
         Domoticz.Debugging(0)
+        Domoticz.Log("Threads still active: "+str(threading.active_count())+", should be 1.")
+        while (threading.active_count() > 1):
+            for thread in threading.enumerate():
+                if (thread.name != threading.current_thread().name):
+                    Domoticz.Log("'"+thread.name+"' is still running, waiting otherwise Domoticz will crash on plugin exit.")
+            time.sleep(1.0)
 
     def onConnect(self, Connection, Status, Description):
         if (Status == 0):

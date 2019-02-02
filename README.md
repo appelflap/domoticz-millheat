@@ -24,10 +24,16 @@ If you are use a Raspberry Pi to host your Domoticz, you probably need to instal
 
 ```bash
 sudo apt install python3-dev python3-pip
-pip3 install --upgrade pip
 pip3 install millheater
 # or sometimes:
 python3 -m pip install millheater
+# Sometimes you need to upgrade pip3 to get the right packages:
+pip3 install --upgrade pip
+```
+
+Link the local dir to subdir.. otherwise we can't find it.. 
+```bash
+ln -s ~/.local/lib/python3.5/site-packages packages
 ```
 
 In your `domoticz/plugins` directory do
