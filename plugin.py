@@ -43,10 +43,15 @@ import Domoticz
 import sys
 import getpass
 import threading
+import site
+import os
 
+path=''
+path=site.getsitepackages()
+for i in path:    
+    sys.path.append(i)
+    
 # Add pip3 locations
-sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.5/site-packages')
-sys.path.append('/home/'+getpass.getuser()+'/.local/lib/python3.6/site-packages')
 sys.path.append('/usr/local/lib/python3.5/dist-packages')
 sys.path.append('/usr/local/lib/python3.6/dist-packages')
 sys.path.append('/usr/lib/python3/dist-packages')
@@ -62,8 +67,6 @@ import mill
 # Images = {'Fireplace': Image}
 
 class MillHeat:
-    enabled = False
-    httpConn = None
     notify = False
     debug = False
     
@@ -100,6 +103,7 @@ class MillHeat:
                 if (thread.name != threading.current_thread().name):
                     Domoticz.Log("'"+thread.name+"' is still running, waiting otherwise Domoticz will crash on plugin exit.")
             time.sleep(1.0)
+
 
     def onConnect(self, Connection, Status, Description):
         if (Status == 0):
@@ -138,7 +142,7 @@ class MillHeat:
             if (Devices[Unit].Type==242):
                 Domoticz.Log("Setting Thermostat "+Devices[Unit].DeviceID+" (external: "+str(decodeHeaterId(Devices[Unit].DeviceID[0:4]))+") to "+str(Level))
                 self.mill.sync_set_heater_temp(decodeHeaterId(Devices[Unit].DeviceID[0:4]), round(Level))
-                
+
         self.getDevices()
                 
         self.mill.sync_close_connection()
